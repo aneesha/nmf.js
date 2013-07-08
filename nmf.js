@@ -1,7 +1,6 @@
 "use strict";
 
-// Javascript implementation of Non-negative Matrix Factorisation Algorithm
-// based on the Multiplicative Update Algorithm
+// Javascript implementation of Non-negative Matrix Factorisation Algorithms
 
 var nmf = (typeof exports === "undefined")?(function nmf() {}):(exports);
 if(typeof global !== "undefined") { global.nmf = nmf; }
@@ -11,6 +10,7 @@ nmf.epsilon = 0.0001;
 
 nmf.mu = function mu(A, k, maxiterations, tolerance)
 {
+  // Implements Lee and Seungs Multiplicative Update Algorithm
   var W,H;
   var m,n;
        
@@ -43,28 +43,3 @@ nmf.calculate_reconstructionError = function calculate_reconstructionError(A, A_
 {
   return numeric.norm2(numeric.sub(A,A_reconstructed));
 }
-
-/*
-
-  var maxiterations = 5;
-  var k = 2;
-  var epsilon = 0.0001;
-  var tolerance = 0.01;
-  var m,n;
-  
-  var A,W,H;
-  
-    A = [[1,1,0,0],
-       [1,1,0,0],
-       [0,0,1,1],
-       [0,0,1,1]];
-       
-         
-  //alert(numeric.prettyPrint(W));
-  
-  //alert(numeric.prettyPrint(H));
-  
-  alert(numeric.prettyPrint(A_reconstructed));
-  
-  alert(calculate_reconstructionError(A, A_reconstructed))
-*/
