@@ -6,16 +6,23 @@ Implementation of Non-negative Matrix Factorization in Javascript. This is a rat
 Simple usage:
 
   var maxiterations = 20;
+  
   var k = 2;
+  
   var tolerance = 0.001;
+  
   var A;
+  
+  
   
   A = [[1,1,0,0],
        [1,1,0,0],
        [0,0,1,1],
        [0,0,1,1]];
   
+  
   nmf_factorized = nmf.mu(A, k, maxiterations, tolerance);
   
   alert(numeric.prettyPrint(nmf_factorized.W));
+  
   alert(numeric.prettyPrint(nmf_factorized.H));
