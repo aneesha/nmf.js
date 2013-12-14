@@ -11,12 +11,12 @@ nmf.epsilon = 0.0001;
 nmf.mu = function mu(A, k, maxiterations, tolerance)
 {
   // Implements Lee and Seungs Multiplicative Update Algorithm
-  var W,H;
-  var m,n;
+  var W,H, A_dim;
+  var m,n,i;
        
-  A_dim = numeric.dim(A)
-  m = A_dim[0]
-  n = A_dim[1]
+  A_dim = numeric.dim(A);
+  m = A_dim[0];
+  n = A_dim[1];
   
   W = numeric.random([m,k]); // initialize W as random matrix
   H = numeric.random([k,n]); // initialize H as random matrix
@@ -28,15 +28,15 @@ nmf.mu = function mu(A, k, maxiterations, tolerance)
     //W = W .* (AH' ) ./ (WHH' + epsilon);
     W = numeric.div(numeric.mul(W,numeric.dot(A,numeric.transpose(H))),(numeric.add(numeric.dot(numeric.dot(W,H),numeric.transpose(H)),nmf.epsilon)));
   
-    A_reconstructed = numeric.dot(W,H);
+    var A_reconstructed = numeric.dot(W,H);
     
-    if (nmf.calculate_reconstructionError <= tolerance)
+    if (nmf.calculate_reconstructionError(A,A_reconstructed) <= tolerance)
     {
       break;
     }
   }
   
-  return {W:W,H:H}
+  return {W:W,H:H};
 }
 
 nmf.calculate_reconstructionError = function calculate_reconstructionError(A, A_reconstructed)
